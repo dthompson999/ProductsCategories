@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Categories Page";
+}
+
+@model Category
+
+<div class="text-center">
+    <div class="jumbotron">
+        <h1 class="display-4">Categories</h1>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <div class="col-5 mx-auto">
+                    <div class="card border-warning mx-auto" style="max-width: 18rem;">
+                        <div class="text-center">
+                            <div class="card-header text-warning bg-dark">
+                                <h3>New Category</h3>
+                            </div>
+                        </div>
+                        <div class="card-body bg-secondary">
+                            <form asp-action="CategoriesCreate" asp-controller="Home" method="post">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group mb-0">
+                                            <label asp-for="Name">Name</label>
+                                            <input type="text" asp-for="Name" class="form-control">
+                                        </div>
+                                        <div class="col-10 text-danger bg-dark">
+                                            <span asp-validation-for="Name"></span>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-warning border-warning bg-dark mt-3">Create</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 mx-auto">
+                    <div class="card border-warning mx-auto" style="max-width: 18rem;">
+                        <div class="text-center">
+                            <div class="card-header text-warning bg-dark">
+                                <h3>Existing Categories</h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group">
+                                @foreach (var c in ViewBag.AllCategories)
+                                {
+                                    <a href="/category/@c.CategoryId" class="list-group-item list-group-item-action border-warning">@c.Name</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

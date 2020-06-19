@@ -1,0 +1,56 @@
+@{
+    ViewData["Title"] = "Product View Page";
+}
+
+@model Category
+
+<div class="text-center">
+    <div class="jumbotron border border-success">
+        <h1 class="display-4 pt-2 pb-3 mb-4 text-white bg-dark border border-dark rounded">@Model.Name</h1>
+        <hr>
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-5 mx-auto">
+                    <div class="card border-success mx-auto" style="max-width: 18rem;">
+                        <div class="text-center">
+                            <div class="card-header text-success bg-dark">
+                                <h3>Products</h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group">
+                                @foreach (var p in @Model.ProductsInCategory)
+                                {
+                                    <a href="/product/@p.ProductId" class="list-group-item list-group-item-action border-success">@p.NavProduct.Name</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 mx-auto">
+                    <div class="card border-success mx-auto" style="max-width: 18rem;">
+                        <div class="text-center">
+                            <div class="card-header text-success bg-dark">
+                                <h3>Add Product</h3>
+                            </div>
+                        </div>
+                        <div class="card-body bg-secondary">
+                            <form action="/category/@Model.CategoryId/AddProduct" method="post">
+                                <div class="form-group mb-0">
+                                    <select type="text" name="ProductId" class="form-control" required>
+                                        <option value=""></option>
+                                        @foreach (var p in ViewBag.UnassignedProducts)
+                                        {
+                                            <option value="@p.ProductId">@p.Name</option>
+                                        }
+                                    </select>
+                                    <button type="submit" class="btn btn-outline-success border-success bg-dark mt-3">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
